@@ -3,7 +3,7 @@
 """
 wxBlender
 =========
-wxPython in Blender
+wxPython in Blender Addon
 
 wxPython toolkit widgets running in Blender.
 Menus, Frames, Dialogs, Custom Buttons, Thumbnails, etc...
@@ -60,6 +60,8 @@ named "wxBlender".
 
 [Blender logo usage guidelines](http://www.blender.org/about/logo/)
 -------------------------------------------------------------------
+![BlenderFavicon](https://raw.github.com/Metallicow/wxBlender/master/wx_blender/images/favicon.ico)
+![BlenderLogo](https://raw.github.com/Metallicow/wxBlender/master/wx_blender/images/logo.png)
 
 The Blender logo is a copyrighted property of NaN Holding B.V, and has been licensed in 2002 to the Blender Foundation. The logo and the brand name “Blender” are not part of the GNU GPL, and can only be used commercially by the Blender Foundation on products, websites and publications.
 
@@ -91,7 +93,7 @@ Amsterdam, March 2009
 
 License
 -------
-Anything NOT involving "Blender" Logos and Graphics/Images is licensed
+Anything **NOT** involving "Blender" Logos and Graphics/Images/blender16 PyEmbeddedImage is licensed
 
 GNU GPL v2.0
 
