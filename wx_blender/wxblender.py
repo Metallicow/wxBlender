@@ -621,3 +621,4 @@ class wxBlenderPanel(bpy.types.Panel):
 
         row = layout.row()
         row.operator("mcow.wxblender_wxframe", text='wxPython Frame', icon='LAMP_DATA')
+
