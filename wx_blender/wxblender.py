@@ -198,6 +198,7 @@ class wxGradientBannerPanel(wx.Panel):
                  style=wx.BORDER_NONE, name='panel'):
         wx.Panel.__init__(self, parent, id, pos, size, style, name)
         self.parent = parent
+        self.dcBmp = wx.Bitmap(gImgDir + os.sep + 'logo.png', wx.BITMAP_TYPE_PNG)
         self.Bind(wx.EVT_PAINT, self.OnPaint)
         self.Bind(wx.EVT_LEFT_DOWN, self.OnLeftDown)
         self.Bind(wx.EVT_LEFT_UP, self.OnLeftUp)
@@ -205,13 +206,8 @@ class wxGradientBannerPanel(wx.Panel):
 
     def DrawGradientBanner(self, dc):
         dc.GradientFillLinear(self.GetClientRect(), '#FF8000', '#FFFFFF', wx.NORTH)
-        bmp = wx.Bitmap(gImgDir + os.sep + 'logo.png', wx.BITMAP_TYPE_PNG)
-        sz = self.GetSize()
-        bmpH = bmp.GetHeight()
-        dc.DrawBitmap(bmp, 10, (sz[1] - bmpH) // 2)
-
-        fnt = wx.Font(12, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
-        dc.SetFont(fnt)
+        dc.DrawBitmap(self.dcBmp, 10, (self.GetSize()[1] - self.dcBmp.GetHeight()) // 2)
+        dc.SetFont(wx.Font(12, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
         dc.SetTextForeground('#005385')
         dc.DrawText('wx', 44, 4)
 
@@ -468,7 +464,6 @@ class wxPythonMenuInBlender(bpy.types.Operator):
     bl_label = "wxPython Menu in Blender"
 
     def execute(self, context):
-
         gApp = wx.App(redirect=False,
                       filename=None,
                       useBestVisual=False,
@@ -501,17 +496,8 @@ class wxPythonMenuInBlender(bpy.types.Operator):
 
         subMenu = wx.Menu()
 
-        for name in ['Plane',
-                     'Cube',
-                     'Circle',
-                     'UV Sphere',
-                     'Icosphere',
-                     'Cylinder',
-                     'Cone',
-                     'Grid',
-                     'Monkey',
-                     'Torus'
-                     ]:
+        for name in ['Plane', 'Cube', 'Circle', 'UV Sphere', 'Icosphere',
+                     'Cylinder', 'Cone', 'Grid', 'Monkey', 'Torus']:
             newid = wx.NewId()
             if name == 'Icosphere':
                 subMenu.Append(newid, '%s' % name, 'bpy.ops.mesh.primitive_ico_sphere_add()')
