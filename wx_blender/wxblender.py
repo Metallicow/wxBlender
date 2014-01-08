@@ -440,9 +440,7 @@ def OnOpenwxBlenderPluginDir(event):
 
 
 class wxPythonFrameInBlender(bpy.types.Operator):
-    """
-    Standard wx.Frame App.
-    """
+    """Standard wx.Frame App."""
     bl_idname = "mcow.wxblender_wxframe"
     bl_label = "wxPython Frame in Blender"
 
@@ -457,9 +455,7 @@ class wxPythonFrameInBlender(bpy.types.Operator):
 
 
 class wxPythonMenuInBlender(bpy.types.Operator):
-    """
-    Simple wx.Menu PopupMenu App.
-    """
+    """Simple wx.Menu PopupMenu App."""
     bl_idname = "mcow.wxblender_wxmenu"
     bl_label = "wxPython Menu in Blender"
 
