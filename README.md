@@ -1,6 +1,8 @@
 wxBlender
 =========
-wxPython in Blender Addon
+[wxPython](http://wxpython.org/Phoenix/docs/html/index.html) + [Blender](http://www.blender.org/) = wxBlender
+
+wxPython in Blender Addon for Blender.
 
 wxPython toolkit widgets running in Blender.
 Menus, Frames, Dialogs, Custom Buttons, Thumbnails, etc...
@@ -60,7 +62,7 @@ named "wxBlender".
 ![BlenderFavicon](https://raw.github.com/Metallicow/wxBlender/master/wx_blender/images/favicon.ico)
 ![BlenderLogo](https://raw.github.com/Metallicow/wxBlender/master/wx_blender/images/logo.png)
 
-The Blender logo is a copyrighted property of NaN Holding B.V, and has been licensed in 2002 to the Blender Foundation. The logo and the brand name “Blender” are not part of the GNU GPL, and can only be used commercially by the Blender Foundation on products, websites and publications.
+The Blender logo is a copyrighted property of NaN Holding B.V, and has been licensed in 2002 to the Blender Foundation. The logo and the brand name "Blender" are not part of the GNU GPL, and can only be used commercially by the Blender Foundation on products, websites and publications.
 
 Under the following conditions, third parties may use the Blender logo as well:
 
@@ -77,9 +79,9 @@ Usage in artwork and community websites
 [Usage in artwork and community websites](http://www.blender.org/about/logo/)
 -----------------------------------------------------------------------------
 
-Blender’s logo has been used in hundreds of ways. This was — and still is — considered to be an honest tribute to Blender, and the guidelines are not meant to make these uses “illegal” or “officially disapproved”. This page is only meant to clarify the Blender Foundation guidelines so that people know their minimum rights and where they can use the logo.
+Blender's logo has been used in hundreds of ways. This was - and still is - considered to be an honest tribute to Blender, and the guidelines are not meant to make these uses "illegal" or "officially disapproved". This page is only meant to clarify the Blender Foundation guidelines so that people know their minimum rights and where they can use the logo.
 
-Modifying the Blender logo is really part of your own artistic freedom, and the Blender Foundation will never act against such tributes. Just don’t expect us to “officially approve” of it, that’s all.
+Modifying the Blender logo is really part of your own artistic freedom, and the Blender Foundation will never act against such tributes. Just don't expect us to "officially approve" of it, that's all.
 
 Thanks,
 
