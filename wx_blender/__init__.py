@@ -8,13 +8,13 @@ bl_info = {
     "location": "View3D -> Properties -> wxPython",
     "description": "Provides a simple demo on how to use wxPython widgets in Blender.",
     "wiki_url": "http://wxpython.org/Phoenix/snapshot-builds/",
-    ## "tracker_url": "http://reportabug/",
+    "tracker_url": "https://github.com/Metallicow/wxBlender/issues",
     "warning": "Requirements: http://wxpython.org/Phoenix/snapshot-builds/ >>> blender's site packages.",
     "category": "3D View"
     }
 
 import bpy
-from .wxblender import * 
+from .wxblender import *
 
 def register():
     bpy.utils.register_class(wxPythonFrameInBlender)
