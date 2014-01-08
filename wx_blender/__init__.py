@@ -3,8 +3,8 @@
 bl_info = {
     "name": "wxBlender",
     "author": "Metallicow",
-    "version": (0, 0, 1),
-    "blender": (2, 68, 0),
+    "version": (0, 0, 2),
+    "blender": (2, 65, 0),
     "location": "View3D -> Properties -> wxPython",
     "description": "Provides a simple demo on how to use wxPython widgets in Blender.",
     "wiki_url": "http://wxpython.org/Phoenix/snapshot-builds/",

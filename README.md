@@ -10,7 +10,7 @@ Menus, Frames, Dialogs, Custom Buttons, Thumbnails, etc...
 
 Requirements
 ------------
-* Blender 2.68+
+* Blender 2.65+(built with Python33+)
 
   http://www.blender.org/
 
@@ -67,5 +67,5 @@ Tested On
 
 | Operating System          | Blender Versions            | Phoenix           |
 |:-------------------------:|:---------------------------:|:-----------------:|
-| Windows XP SP3 32bit      | 2.68, 2.69                  | 3.0.1.dev75563    |
+| Windows XP SP3 32bit      | 2.65 - 2.69                 | 3.0.1.dev75563    |
 | Other OS                  | TODO                        |                   |

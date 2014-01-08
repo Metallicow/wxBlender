@@ -11,7 +11,7 @@ Menus, Frames, Dialogs, Custom Buttons, Thumbnails, etc...
 
 Requirements
 ------------
-* Blender 2.68+
+* Blender 2.65+(built with Python33+)
 
   http://www.blender.org/
 
@@ -68,7 +68,7 @@ Tested On
 
 | Operating System          | Blender Versions            | Phoenix           |
 |:-------------------------:|:---------------------------:|:-----------------:|
-| Windows XP SP3 32bit      | 2.68, 2.69                  | 3.0.1.dev75563    |
+| Windows XP SP3 32bit      | 2.65 - 2.69                 | 3.0.1.dev75563    |
 | Other OS                  | TODO                        |                   |
 
 """
@@ -77,6 +77,23 @@ Tested On
 #--Python Imports.
 import os
 import sys
+
+## print('sys.executable', sys.executable)
+# returns C:\Program Files\Blender Foundation\Blender #.##\blender.exe
+## print('sys.prefix', sys.prefix)
+# returns C:\Program Files\Blender Foundation\Blender #.##\#.##\python
+
+# Add site-packages to the system path.
+# Older Blenders might not have it on the sys.path.
+# We need to find wx in site-packages.
+sitePackPath = os.path.join(sys.prefix, 'lib', 'site-packages')
+print(os.path.exists(sitePackPath))
+if os.path.exists(sitePackPath) and sitePackPath in sys.path:
+    pass # Ok. Good.
+elif os.path.exists(sitePackPath) and sitePackPath not in sys.path:
+    sys.path.insert(0, sitePackPath)
+else:
+    raise Exception("Can't locate %s" % sitePackPath)
 
 #--Blender Imports.
 import bpy
@@ -169,7 +186,9 @@ class AddMeshesPanel(bpy.types.Panel):
         row.operator("mesh.primitive_monkey_add", text='Monkey', icon='MESH_MONKEY')
 
         row = layout.row()
-        row.label(text="Plugin Meshes", icon='PLUGIN')
+        row.label(icon='POSE_DATA')
+        row.label(text="Extra Objects Plugin Meshes")
+        row.label(icon='PLUGIN') # Add Extra Icon To Other Side of Label
 
         box = layout.box()
         col = box.column(align=True)
@@ -262,6 +281,8 @@ class wxAddMeshesPanel(wx.Panel):
 
         gSizer = wx.GridSizer(rows=2, cols=2, vgap=5, hgap=5)
 
+        dirBpyOpsMesh = dir(bpy.ops.mesh)
+
         btn2 = wx.BitmapButton(self, -1, wx.Bitmap(gThumbDir + os.sep + 'cube.png', wx.BITMAP_TYPE_PNG))
         btn2.SetToolTip(wx.ToolTip('bpy.ops.mesh.primitive_cube_add()'))
         btn2.Bind(wx.EVT_BUTTON, self.OnAddMeshFromToolTip)
@@ -273,10 +294,14 @@ class wxAddMeshesPanel(wx.Panel):
         btn4 = wx.BitmapButton(self, -1, wx.Bitmap(gThumbDir + os.sep + 'pyramid.png', wx.BITMAP_TYPE_PNG))
         btn4.SetToolTip(wx.ToolTip('bpy.ops.mesh.primitive_steppyramid_add()'))
         btn4.Bind(wx.EVT_BUTTON, self.OnAddMeshFromToolTip)
+        if not 'primitive_steppyramid_add' in dirBpyOpsMesh:
+            btn4.Enable(False)
 
         btn5 = wx.BitmapButton(self, -1, wx.Bitmap(gThumbDir + os.sep + 'teapot.png', wx.BITMAP_TYPE_PNG))
         btn5.SetToolTip(wx.ToolTip('bpy.ops.mesh.primitive_teapot_add()'))
         btn5.Bind(wx.EVT_BUTTON, self.OnAddMeshFromToolTip)
+        if not 'primitive_teapot_add' in dirBpyOpsMesh:
+            btn5.Enable(False)
 
         gSizer.AddMany([(btn2, 0, wx.ALIGN_TOP | wx.ALIGN_LEFT),
                         (btn3, 0, wx.ALIGN_TOP | wx.ALIGN_RIGHT),
@@ -344,6 +369,13 @@ class wxBlenderAddMeshesFrame(wx.Frame):
 
         #### self.SetTransparent(200) # Not working out so well with the HackRefresh...
 
+        # We want the Escape key to Close the frame, so bind the whole family tree also.
+        for child in self.GetChildren():
+            child.Bind(wx.EVT_KEY_UP, self.OnKeyUp)
+            for grandchild in child.GetChildren():
+                grandchild.Bind(wx.EVT_KEY_UP, self.OnKeyUp)
+        self.Bind(wx.EVT_KEY_UP, self.OnKeyUp)
+
         self.SetIcon(wx.Icon(wx.Bitmap(gImgDir + os.sep + 'favicon.ico', wx.BITMAP_TYPE_ICO)))
         self.Bind(wx.EVT_CLOSE, self.OnDestroy)
 
@@ -355,6 +387,11 @@ class wxBlenderAddMeshesFrame(wx.Frame):
 
         # Lose focus destroy workaround.
         wx.CallAfter(self.Bind, wx.EVT_ACTIVATE, self.OnActivate)
+
+    def OnKeyUp(self, event):
+        keyCode = event.GetKeyCode()
+        if keyCode == wx.WXK_ESCAPE:
+            self.Close()
 
     def OnSize(self, event):
         self.Layout()
