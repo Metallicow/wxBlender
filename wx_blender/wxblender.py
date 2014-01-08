@@ -204,9 +204,7 @@ class wxGradientBannerPanel(wx.Panel):
         self.Bind(wx.EVT_MOTION, self.OnMotion)
 
     def DrawGradientBanner(self, dc):
-        dc.GradientFillLinear(self.GetClientRect(),
-                              '#FF8000', '#FFFFFF',
-                              wx.NORTH)
+        dc.GradientFillLinear(self.GetClientRect(), '#FF8000', '#FFFFFF', wx.NORTH)
         bmp = wx.Bitmap(gImgDir + os.sep + 'logo.png', wx.BITMAP_TYPE_PNG)
         sz = self.GetSize()
         bmpH = bmp.GetHeight()
@@ -253,9 +251,7 @@ class wxGradientBannerPanel(wx.Panel):
         """
         if event.Dragging() and event.LeftIsDown():
             x, y = self.parent.ClientToScreen(event.GetPosition())
-            fp = (x - self.parent.delta[0], y - self.parent.delta[1])
-            self.parent.Move(fp)
-            HackRefresh()
+            self.parent.Move((x - self.parent.delta[0], y - self.parent.delta[1]))
 
 
 class wxAddMeshesPanel(wx.Panel):
@@ -309,12 +305,12 @@ class wxAddMeshesPanel(wx.Panel):
             import traceback
             tb = traceback.format_exc()
             wx.MessageBox('%s' % tb, 'AttributeError', wx.ICON_ERROR)
-        wx.CallAfter(HackRefresh)
+        ## wx.CallAfter(HackRefresh)
         self.parent.Close() # Optional: Lets destroy after clicking.
 
     def OnRegisterAddMeshesPanel(self, event):
         bpy.utils.register_class(AddMeshesPanel)
-        wx.CallAfter(HackRefresh)
+        ## wx.CallAfter(HackRefresh)
         self.parent.Close() # Optional: Lets destroy after clicking.
 
 
@@ -355,16 +351,8 @@ class wxBlenderAddMeshesFrame(wx.Frame):
         self.SetIcon(wx.Icon(wx.Bitmap(gImgDir + os.sep + 'favicon.ico', wx.BITMAP_TYPE_ICO)))
         self.Bind(wx.EVT_CLOSE, self.OnDestroy)
 
-        #### self.timer = wx.Timer(self)
-        #### self.timer.Start(0)
-        #### self.Bind(wx.EVT_TIMER, HackRefresh)
-
-        self.Bind(wx.EVT_IDLE, HackRefresh)
-
         self.Bind(wx.EVT_SIZE, self.OnSize)
-
         self.Bind(wx.EVT_MOVE, HackRefresh)
-        self.Bind(wx.EVT_MOVE_END, HackRefresh)
 
         self.Centre()
         self.SetFocus()
