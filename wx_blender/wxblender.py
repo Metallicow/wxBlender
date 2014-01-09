@@ -404,6 +404,8 @@ class wxBlenderAddMeshesFrame(wx.Frame):
         self.Fit()
         self.SetMinSize(self.GetSize())
 
+        self.sizeAttr = self.GetSize()
+
         #### self.SetTransparent(200) # Not working out so well with the HackRefresh...
 
         # We want the Escape key to Close the frame, so bind the whole family tree also.
@@ -417,7 +419,7 @@ class wxBlenderAddMeshesFrame(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.OnDestroy)
 
         self.Bind(wx.EVT_SIZE, self.OnSize)
-        self.Bind(wx.EVT_MOVE, HackRefresh)
+        self.Bind(wx.EVT_MOVE, self.OnMove)
 
         self.Centre()
         self.SetFocus()
@@ -430,9 +432,18 @@ class wxBlenderAddMeshesFrame(wx.Frame):
         if keyCode == wx.WXK_ESCAPE:
             self.Close()
 
+    def OnMove(self, event):
+        HackRefresh()
+
+    def SetSelfSizeAttr(self):
+        self.sizeAttr = self.GetSize()
+
     def OnSize(self, event):
         self.Layout()
-        HackRefresh()
+        # Smooth sizing(what it should be normally) when sizing the frame bigger.
+        if event.GetSize()[0] < self.sizeAttr[0] or event.GetSize()[1] < self.sizeAttr[1]: # The user is decreasing the frame size.
+            HackRefresh()
+        wx.CallAfter(self.SetSelfSizeAttr)
 
     def OnActivate(self, event):
         """

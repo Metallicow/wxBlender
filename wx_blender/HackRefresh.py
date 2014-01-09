@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import bpy
+from bpy import ops
 
-def HackRefresh(event=None):
+def HackRefresh():
     """
     When moving/sizing the wxFrame, It smears across the blender GUI,
     making it look ugly.
@@ -10,4 +10,4 @@ def HackRefresh(event=None):
     What is being attempted here is a refresh,
     so to clear the ugliness from the screen.
     """
-    bpy.ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
+    ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
