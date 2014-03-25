@@ -104,6 +104,6 @@ Tested On
 
 | Operating System          | Blender Versions            | Phoenix           |
 |:-------------------------:|:---------------------------:|:-----------------:|
-| Windows XP SP3 32bit      | 2.65 - 2.69                 | 3.0.1.dev75563    |
+| Windows XP SP3 32bit      | 2.65 - 2.70                 | 3.0.1.dev76189    |
 | Other OS                  | TODO                        |                   |
 
